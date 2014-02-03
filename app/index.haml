@@ -1,0 +1,82 @@
+!!!
+%head
+  %meta{:charset => "utf-8"}
+  %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}
+  %title RaxiOxide
+  %meta{:content => "", :name => "description"}
+  %meta{:content => "width=device-width", :name => "viewport"}
+
+  /build:css styles/vendor.css
+  /bower:css
+  %link{:href => "bower_components/sass-bootstrap/dist/css/bootstrap.css", :rel => "stylesheet"}
+  /endbower
+  /endbuild
+
+  /build:css({.tmp,app}) styles/main.css
+  %link{:href => "styles/main.css", :rel => "stylesheet"}
+  %link{:href => "styles/player.css", :rel => "stylesheet"}
+  /endbuild
+
+%body{"ng-app" => "radioxideApp"}
+  .container
+    .header
+      .navbar.navbar-default{role: :navigation, 'bs-navbar' => true}
+        .navbar-header
+          %a.navbar-brand{href: '#'} RadiO2
+        %ul.nav.navbar-nav
+          %li{'data-match-route' => '/'}
+            %a{href: '#/'} Home
+          %li{'data-match-route' => '/local'}
+            %a{href: '#/local'} Local
+          %li{'data-match-route' => '/genres(/.*)?'}
+            %a{href: '#/genres'} By Genre
+        %ul.nav.navbar-nav.pull-right{'ng-controller' => 'SessionCtrl'}
+          %li{"ng-show" => 'currentUser.email'}
+            %a{href: '', 'ng-click' => 'logout()'} Sign Out
+          %li{"ng-hide" => 'currentUser.email'}
+            %a{href: '#/signup'} Sign Up
+          %li{"ng-hide" => 'currentUser.email'}
+            %a{href: '#/signin'} Sign In
+
+
+    .yield{"ng-view" => ""}
+    .footer
+      Yeaaaah for RadiO2
+  %player
+    Player will be here
+
+
+  /[if lt IE 9]
+    %script{:src => "bower_components/es5-shim/es5-shim.js"}
+    %script{:src =>"bower_components/json3/lib/json3.min.js"}
+
+  /build:js scripts/vendor.js
+  /bower:js
+  %script{:src => "bower_components/jquery/jquery.js"}
+  %script{:src => "bower_components/angular/angular.js"}
+  %script{:src => "bower_components/sass-bootstrap/dist/js/bootstrap.js"}
+  %script{:src => "bower_components/angular-resource/angular-resource.js"}
+  %script{:src => "bower_components/angular-cookies/angular-cookies.js"}
+  %script{:src => "bower_components/angular-sanitize/angular-sanitize.js"}
+  %script{:src => "bower_components/angular-route/angular-route.js"}
+  %script{:src => "bower_components/lodash/dist/lodash.underscore.js"}
+  %script{:src => "bower_components/restangular/src/restangular.js"}
+  %script{:src => "bower_components/angular-strap/dist/angular-strap.min.js"}
+  %script{:src => "bower_components/angular-strap/dist/angular-strap.tpl.min.js"}
+  /endbower
+  /endbuild
+
+  /build:js({.tmp,app}) scripts/scripts.js
+  %script{:src => "scripts/app.js"}
+  %script{:src => "scripts/services/player.js"}
+  %script{:src => "scripts/services/authentication.js"}
+  %script{:src => "scripts/directives/player.js"}
+  %script{:src => "scripts/directives/radio.js"}
+  %script{:src => "scripts/controllers/main.js"}
+  %script{:src => "scripts/controllers/local.js"}
+  %script{:src => "scripts/controllers/allgenres.js"}
+  %script{:src => "scripts/controllers/genre.js"}
+  %script{:src => "scripts/controllers/contribution.js"}
+  %script{:src => "scripts/controllers/session.js"}
+  /endbuild
+
