@@ -31,7 +31,7 @@ module.config ($routeProvider, RestangularProvider) ->
   $routeProvider.when '/',
     templateUrl: 'views/main.html',
     controller:  'MainCtrl'
-  .when '/search/:query',
+  .when '/search/:query?/:page?',
     templateUrl: 'views/search.html',
     controller:  'SearchCtrl'
   .when '/local/:page?',

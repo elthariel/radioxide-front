@@ -30,9 +30,9 @@
             %a{href: '#/local'} Local
           %li{'data-match-route' => '/genres(/.*)?'}
             %a{href: '#/genres'} By Genre
-        %form.navbar-form.navbar-left{role: "search"}
+        %form.navbar-form.navbar-left{role: "search", 'ng-controller' => 'SearchCtrl', 'ng-submit' => 'submit()'}
           .form-group
-            %input.form-control{type: :text, placeholder: 'Search'}
+            %input.form-control{type: :text, placeholder: 'Search', 'ng-model' => 'navbarQuery'}
           %button.btn.btn-default{type: "submit"} Go
 
         %ul.nav.navbar-nav.navbar-right{'ng-controller' => 'SessionCtrl'}
