@@ -28,27 +28,33 @@ module.config ($routeProvider, RestangularProvider) ->
 
 
   # Our application routes
-  route = $routeProvider.when '/',
+  $routeProvider.when '/',
     templateUrl: 'views/main.html',
     controller:  'MainCtrl'
-  route = route.when '/local',
-    templateUrl: 'views/radios.html',
+  .when '/search/:query',
+    templateUrl: 'views/search.html',
+    controller:  'SearchCtrl'
+  .when '/local/:page?',
+    templateUrl: 'views/local.html',
     controller:  'LocalCtrl'
-  route = route.when '/genres',
+  .when '/genres',
     templateUrl: 'views/genres.html',
     controller:  'AllGenresCtrl'
-  route = route.when '/genres/:genre',
+  .when '/genres/:genre/:page?',
     templateUrl: 'views/genre.html',
     controller:  'GenreCtrl'
-  route = route.when '/contribute/:id',
+  .when '/genres/:genre/:page?',
+    templateUrl: 'views/genre.html',
+    controller:  'GenreCtrl'
+  .when '/contribute/:id',
     templateUrl: 'views/contrib.html',
     controller: 'ContributionCtrl'
-  route = route.when '/signin',
+  .when '/signin',
     templateUrl: 'views/signin.html',
     controller:  'SessionCtrl'
-  route = route.when '/signup',
+  .when '/signup',
     templateUrl: 'views/signup.html',
     controller:  'RegistrationCtrl'
-  route.otherwise
+  .otherwise
     redirectTo: '/'
 

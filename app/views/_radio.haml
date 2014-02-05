@@ -19,6 +19,8 @@
         %li
           %span.label.label-default {{stream.mime}}
           {{stream.uri}}
-    %p
+    %p{'ng-show' => 'currentUser'}
       %strong
         %a{href: '/#/contribute/{{radio.slug}}'} Edit this station !
+
+

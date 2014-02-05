@@ -9,6 +9,6 @@ angular.module('radioxideApp')
 
     $scope.login = () ->
       Restangular.all('user').all('sessions')
-        .post({ user_session: $scope.session }).then (session, headers) ->
+        .post({ user_session: $scope.session }).then () ->
           Authentication.refreshCurrentUser()
           $location.path('/')

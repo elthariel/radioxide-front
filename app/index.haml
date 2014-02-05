@@ -30,7 +30,12 @@
             %a{href: '#/local'} Local
           %li{'data-match-route' => '/genres(/.*)?'}
             %a{href: '#/genres'} By Genre
-        %ul.nav.navbar-nav.pull-right{'ng-controller' => 'SessionCtrl'}
+        %form.navbar-form.navbar-left{role: "search"}
+          .form-group
+            %input.form-control{type: :text, placeholder: 'Search'}
+          %button.btn.btn-default{type: "submit"} Go
+
+        %ul.nav.navbar-nav.navbar-right{'ng-controller' => 'SessionCtrl'}
           %li{"ng-show" => 'currentUser.email'}
             %a{href: '', 'ng-click' => 'logout()'} Sign Out
           %li{"ng-hide" => 'currentUser.email'}
@@ -39,7 +44,7 @@
             %a{href: '#/signin'} Sign In
 
 
-    .yield{"ng-view" => ""}
+    .yield{'ng-view' => true}
     .footer
       Yeaaaah for RadiO2
   %player
@@ -59,6 +64,7 @@
   %script{:src => "bower_components/angular-cookies/angular-cookies.js"}
   %script{:src => "bower_components/angular-sanitize/angular-sanitize.js"}
   %script{:src => "bower_components/angular-route/angular-route.js"}
+  %script{:src => "bower_components/angular-animate/angular-animate.js"}
   %script{:src => "bower_components/lodash/dist/lodash.underscore.js"}
   %script{:src => "bower_components/restangular/src/restangular.js"}
   %script{:src => "bower_components/angular-strap/dist/angular-strap.min.js"}
@@ -72,11 +78,14 @@
   %script{:src => "scripts/services/authentication.js"}
   %script{:src => "scripts/directives/player.js"}
   %script{:src => "scripts/directives/radio.js"}
+  %script{:src => "scripts/directives/paginate.js"}
   %script{:src => "scripts/controllers/main.js"}
   %script{:src => "scripts/controllers/local.js"}
   %script{:src => "scripts/controllers/allgenres.js"}
   %script{:src => "scripts/controllers/genre.js"}
   %script{:src => "scripts/controllers/contribution.js"}
   %script{:src => "scripts/controllers/session.js"}
+  %script{:src => "scripts/controllers/registration.js"}
+  %script{:src => "scripts/controllers/search.js"}
   /endbuild
 
