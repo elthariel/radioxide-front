@@ -39,7 +39,7 @@
       .form-group
         %label.col-sm-5.control-label Logo
         .col-sm-7
-          %input.form-control{type: :file, 'ng-model' => 'station.new_logo'}
+          %input.form-control{type: :file, onchange: "angular.element(this).scope().setLogo(this.files[0]); angular.element(this).scope().$digest();"}
   .col-md-6
     %form{role: :form}
       .form-group

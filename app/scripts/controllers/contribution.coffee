@@ -1,12 +1,22 @@
 'use strict'
 
 angular.module('radioxideApp')
-  .controller 'ContributionCtrl', ($scope, Restangular, $routeParams) ->
+  .controller 'ContributionCtrl', ($scope, Restangular, $routeParams, $location) ->
     id = $routeParams.id
     Restangular.one('stations', id).get().then (station) ->
       station.genres = station.genre_list.join(', ')
       delete station.genre_list
       $scope.station = station
+
+    $scope.setLogo = (file) ->
+      reader = new FileReader
+      reader.onloadend = () ->
+        matches = reader.result.match(/^data:([a-z\/]+);base64,(.+)$/)
+        $scope.base64Logo =
+          filename:     file.name
+          content_type: matches[1]
+          base64:       matches[2]
+      reader.readAsDataURL(file)
 
     $scope.submit = () ->
       # Cloning our station so we can prepare it for submission
@@ -22,6 +32,10 @@ angular.module('radioxideApp')
       api_station.genre_list = api_station.genres.split(',')
       delete api_station.genres
 
-      api_station.post 'suggest', { station: api_station }
+      if $scope.base64Logo and $scope.base64Logo.base64
+        api_station.base64_logo = $scope.base64Logo
+
+      api_station.post('suggest', { station: api_station }).then () ->
+        $location.path('/')
 
 
